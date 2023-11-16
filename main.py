@@ -1,25 +1,25 @@
-import numpy as np
 import os
 
 # Author Robert Imber
 num = 0
 clear = lambda: os.system("clear")
-class NC():
+class NC:
     def __init__(self):
         self.pos = []
         self.i = 0
         self.num = ''
-
+        self.playagain = ''
     def cls(self):
         pass
-
 
     def load_defaults(self):
         self.pos.clear()
         for self.i in range(0,9,1):
             self.pos.append(self.i)
         return
+
     def board(self):
+
         print(self.pos)
         print(self.pos[0]," | ",self.pos[1]," | ",self.pos[2]," ")
         print("---+-----+----")
@@ -50,13 +50,14 @@ class NC():
                 self.pos[7] = 'X'
             case 8:
                 self.pos[8] = 'X'
+
     def playerMove(self):
         self.num = input("enter pos ")
         if self.num == "x":
-            run = False
             TTT.endgame()
         else:
             self.player(int(self.num))
+
     def goal_check(self):
 
         if (self.pos[0] == 'X' and self.pos[1] == 'X' and self.pos[2] == 'X') or \
@@ -97,10 +98,11 @@ class NC():
             print('Cheerio')
             TTT.endgame()
 
-
     def endgame(self):
-
         exit()
+
+
+# Program Start and Main Loop
 TTT = NC()
 TTT.load_defaults()
 run = True

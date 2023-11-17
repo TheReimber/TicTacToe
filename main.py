@@ -9,11 +9,14 @@ class NC:
         self.i = 0
         self.num = ''
         self.playagain = ''
+        self.counter = 9
+
     def cls(self):
         pass
 
     def load_defaults(self):
         self.pos.clear()
+        self.counter = 9
         for self.i in range(0,9,1):
             self.pos.append(self.i)
         return
@@ -57,40 +60,48 @@ class NC:
             TTT.endgame()
         else:
             self.player(int(self.num))
+            self.counter -= 1
 
     def goal_check(self):
+        if self.counter > 0:
+            if (self.pos[0] == 'X' and self.pos[1] == 'X' and self.pos[2] == 'X') or \
+                    (self.pos[3] == 'X' and self.pos[4] == 'X' and self.pos[5] == 'X') or \
+                    (self.pos[6] == 'X' and self.pos[7] == 'X' and self.pos[8] == 'X') or \
+                    (self.pos[0] == 'X' and self.pos[3] == 'X' and self.pos[6] == 'X') or \
+                    (self.pos[1] == 'X' and self.pos[4] == 'X' and self.pos[7] == 'X') or \
+                    (self.pos[2] == 'X' and self.pos[5] == 'X' and self.pos[8] == 'X') or \
+                    (self.pos[0] == 'X' and self.pos[4] == 'X' and self.pos[8] == 'X') or \
+                    (self.pos[2] == 'X' and self.pos[4] == 'X' and self.pos[6] == 'X'):
+                clear()
+                TTT.board()
+                print("Player Wins")
+                TTT.again()
 
-        if (self.pos[0] == 'X' and self.pos[1] == 'X' and self.pos[2] == 'X') or \
-                (self.pos[3] == 'X' and self.pos[4] == 'X' and self.pos[5] == 'X') or \
-                (self.pos[6] == 'X' and self.pos[7] == 'X' and self.pos[8] == 'X') or \
-                (self.pos[0] == 'X' and self.pos[3] == 'X' and self.pos[6] == 'X') or \
-                (self.pos[1] == 'X' and self.pos[4] == 'X' and self.pos[7] == 'X') or \
-                (self.pos[2] == 'X' and self.pos[5] == 'X' and self.pos[8] == 'X') or \
-                (self.pos[0] == 'X' and self.pos[4] == 'X' and self.pos[8] == 'X') or \
-                (self.pos[2] == 'X' and self.pos[4] == 'X' and self.pos[6] == 'X'):
+            if (self.pos[0] == 'O' and self.pos[1] == 'O' and self.pos[2] == 'O') or \
+                    (self.pos[3] == 'O' and self.pos[4] == 'O' and self.pos[5] == 'O') or \
+                    (self.pos[6] == 'O' and self.pos[7] == 'O' and self.pos[8] == 'O') or \
+                    (self.pos[0] == 'O' and self.pos[3] == 'O' and self.pos[6] == 'O') or \
+                    (self.pos[1] == 'O' and self.pos[4] == 'O' and self.pos[7] == 'O') or \
+                    (self.pos[2] == 'O' and self.pos[5] == 'O' and self.pos[8] == 'O') or \
+                    (self.pos[0] == 'O' and self.pos[4] == 'O' and self.pos[8] == 'O') or \
+                    (self.pos[2] == 'O' and self.pos[4] == 'O' and self.pos[6] == 'O'):
+                clear()
+                TTT.board()
+                TTT.again()
+                print("Computer Wins")
+        else:
             clear()
             TTT.board()
-            print("Player Wins")
+            print("Its a Tie")
             TTT.again()
 
-        if (self.pos[0] == 'O' and self.pos[1] == 'O' and self.pos[2] == 'O') or \
-                (self.pos[3] == 'O' and self.pos[4] == 'O' and self.pos[5] == 'O') or \
-                (self.pos[6] == 'O' and self.pos[7] == 'O' and self.pos[8] == 'O') or \
-                (self.pos[0] == 'O' and self.pos[3] == 'O' and self.pos[6] == 'O') or \
-                (self.pos[1] == 'O' and self.pos[4] == 'O' and self.pos[7] == 'O') or \
-                (self.pos[2] == 'O' and self.pos[5] == 'O' and self.pos[8] == 'O') or \
-                (self.pos[0] == 'O' and self.pos[4] == 'O' and self.pos[8] == 'O') or \
-                (self.pos[2] == 'O' and self.pos[4] == 'O' and self.pos[6] == 'O'):
-            clear()
-            TTT.board()
-            TTT.again()
-            print("Computer Wins")
 
     def again(self):
         self.playagain = input("Play again y/n ")
 
         if self.playagain == 'y':
             self.pos.clear()
+
             TTT.load_defaults()
 
         elif self.playagain == 'n':
@@ -109,6 +120,7 @@ run = True
 
 while run:
     clear()
+    print(TTT.counter)
     TTT.board()
     TTT.playerMove()
     TTT.goal_check()

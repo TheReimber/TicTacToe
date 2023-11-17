@@ -1,8 +1,9 @@
 import os
-
+import time
 # Author Robert Imber
 num = 0
 clear = lambda: os.system("clear")
+
 class NC:
     def __init__(self):
         self.pos = []
@@ -10,6 +11,7 @@ class NC:
         self.num = ''
         self.playagain = ''
         self.counter = 9
+        self.playerTurn = True
 
     def cls(self):
         pass
@@ -55,13 +57,16 @@ class NC:
                 self.pos[8] = 'X'
 
     def playerMove(self):
-        self.num = input("enter pos ")
-        if self.num == "x":
-            TTT.endgame()
+        if self.playerTurn:
+            self.num = input("enter pos ")
+            if self.num == "x":
+                TTT.endgame()
+            else:
+                self.player(int(self.num))
+                self.counter -= 1
+                self.playerTurn= False
         else:
-            self.player(int(self.num))
-            self.counter -= 1
-
+            print ("AI's turn")
     def goal_check(self):
         if self.counter > 0:
             if (self.pos[0] == 'X' and self.pos[1] == 'X' and self.pos[2] == 'X') or \
@@ -112,6 +117,8 @@ class NC:
     def endgame(self):
         exit()
 
+    def ai(self):
+        time.sleep(5)
 
 # Program Start and Main Loop
 TTT = NC()
@@ -122,7 +129,13 @@ while run:
     clear()
     print(TTT.counter)
     TTT.board()
-    TTT.playerMove()
+    if TTT.playerTurn == True:
+        TTT.playerMove()
+        TTT.goal_check()
+    else:
+        print("AI to Move")
+        TTT.ai()
+        TTT.playerTurn = True
     TTT.goal_check()
 
 

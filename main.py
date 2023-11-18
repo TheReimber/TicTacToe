@@ -115,6 +115,7 @@ class NC:
             TTT.endgame()
 
     def endgame(self):
+        # end game
         exit()
 
     def ai(self):

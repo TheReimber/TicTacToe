@@ -6,6 +6,8 @@ clear = lambda: os.system("clear")
 
 class NC:
     def __init__(self):
+        self.Player_Val = 10
+        self.ai_val = -10
         self.pos = []
         self.i = 0
         self.num = ''
@@ -77,10 +79,11 @@ class NC:
                     (self.pos[2] == 'X' and self.pos[5] == 'X' and self.pos[8] == 'X') or \
                     (self.pos[0] == 'X' and self.pos[4] == 'X' and self.pos[8] == 'X') or \
                     (self.pos[2] == 'X' and self.pos[4] == 'X' and self.pos[6] == 'X'):
-                clear()
-                TTT.board()
-                print("Player Wins")
-                TTT.again()
+                # clear()
+                # TTT.board()
+                # print("Player Wins")
+                # TTT.again()
+                self.Player_Val = 1
 
             if (self.pos[0] == 'O' and self.pos[1] == 'O' and self.pos[2] == 'O') or \
                     (self.pos[3] == 'O' and self.pos[4] == 'O' and self.pos[5] == 'O') or \
@@ -90,15 +93,18 @@ class NC:
                     (self.pos[2] == 'O' and self.pos[5] == 'O' and self.pos[8] == 'O') or \
                     (self.pos[0] == 'O' and self.pos[4] == 'O' and self.pos[8] == 'O') or \
                     (self.pos[2] == 'O' and self.pos[4] == 'O' and self.pos[6] == 'O'):
-                clear()
-                TTT.board()
-                TTT.again()
-                print("Computer Wins")
+                # clear()
+                # TTT.board()
+                # TTT.again()
+                # print("Computer Wins")
+                self.ai_val = -1
         else:
-            clear()
-            TTT.board()
-            print("Its a Tie")
-            TTT.again()
+            # clear()
+            # TTT.board()
+            # print("Its a Tie")
+            # TTT.again()
+            self.ai_val = None
+
 
 
     def again(self):
@@ -119,7 +125,21 @@ class NC:
         exit()
 
     def ai(self):
-        time.sleep(5)
+
+        def checkPossibles():
+            pass
+
+        for i in range(0,len(self.pos)):
+            if self.pos[i] == 'X' or self.pos[i] == 'O':
+                pass
+            else:
+                self.ai_move = checkPossibles()
+
+
+
+
+
+
 
 # Program Start and Main Loop
 TTT = NC()
@@ -137,7 +157,7 @@ while run:
         print("AI to Move")
         TTT.ai()
         TTT.playerTurn = True
-    TTT.goal_check()
+    #TTT.goal_check()
 
 
 
